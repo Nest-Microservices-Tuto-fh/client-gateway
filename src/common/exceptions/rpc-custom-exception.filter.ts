@@ -9,6 +9,7 @@ export class RpcCustomExceptionFilter implements ExceptionFilter {
         const response = ctx.getResponse();
 
         const rpcError = exception.getError();
+
         if (typeof rpcError === 'object' && 'status' in rpcError && 'message' in rpcError) {
             const staus = isNaN(+rpcError.status) ? 400 : rpcError.status;
             return response.status(staus).json(rpcError);
